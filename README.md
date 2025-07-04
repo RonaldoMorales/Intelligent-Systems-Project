@@ -14,8 +14,8 @@ This is the repository of the project from the semester. The project consists of
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/intelligent-systems-project.git
-   cd intelligent-systems-project
+   git clone https://github.com/RonaldoMorales/Intelligent-Systems-Project.git
+   cd Intelligent-Systems-Project
    ```
 
 2. **Install dependencies**
