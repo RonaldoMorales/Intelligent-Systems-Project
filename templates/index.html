@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Earthquake Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 60px;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1>🌍 Earthquake Finder</h1>
+            <p class="text-muted">Enter coordinates to find earthquakes near that location</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="text" class="form-control" name="latitude" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="text" class="form-control" name="longitude" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if results is not none %}
+            {% if results %}
+                <div class="mt-5">
+                    <h3>Results Found: {{ results|length }}</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered mt-3">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Magnitude</th>
+                                    <th>Depth (km)</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Place</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for quake in results %}
+                                    <tr>
+                                        <td>{{ quake.time }}</td>
+                                        <td>{{ quake.magnitude }}</td>
+                                        <td>{{ quake.depth }}</td>
+                                        <td>{{ quake.latitude }}</td>
+                                        <td>{{ quake.longitude }}</td>
+                                        <td>{{ quake.place }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <div class="mt-5 alert alert-warning text-center" role="alert">
+                    <strong>No earthquakes found</strong> within approximately 500 km of the location you entered.
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
